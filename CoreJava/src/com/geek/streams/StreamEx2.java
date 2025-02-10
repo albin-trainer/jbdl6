@@ -21,6 +21,6 @@ public static void main(String[] args) {
 	char ch[]=s2.toCharArray();
 	Stream<char[]> str2=Stream.of(ch);
 	
-Arrays.st
+
 }
 }
