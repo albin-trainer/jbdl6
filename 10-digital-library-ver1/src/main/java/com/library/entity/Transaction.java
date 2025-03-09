@@ -29,6 +29,7 @@ private Book book; // many to one
 @OneToOne
 @JoinColumn(name="penalyid") //optional
 private Penalty penalty; //one to one
+
 public int getTransactionId() {
 	return transactionId;
 }

@@ -17,9 +17,9 @@ List<Book> allBooks();
 Page<Book> allBookswithPagination(int pageNo,int size);
 List<Book> searchByAuthour(int authourId);
 List<Book> searchByGenre(Genre genre);
-Book updateBook(Book book,int bookId);
+Book updateBook(BookDto book,int bookId);
 void removeBook(int bookId);
 
 List<Book> searchByBookName(String bookName);
-
+public int updateCost(int bookId, float cost);
 }

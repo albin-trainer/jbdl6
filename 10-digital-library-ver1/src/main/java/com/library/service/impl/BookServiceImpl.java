@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +39,8 @@ public class BookServiceImpl implements BookService{
 			//Authour a=optional.get();
 		//NoSuchElementException will occur here if authour id not found
 		 //  Authour a=authRepo.findById(book.getAuthourId()).get();
-		Authour a=authRepo.findById(book.getAuthourId()).orElseThrow(()-> new AuthourNotFoundException(book.getAuthourId() +" authour id Not found"));
+		Authour a=authRepo.findById(book.getAuthourId()).
+				orElseThrow(()-> new AuthourNotFoundException(book.getAuthourId() +" authour id Not found"));
 			Book b=new Book();
 //			b.setBookId(book.getBookId());
 //			b.setBookName(book.getBookName());
@@ -57,50 +60,50 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public List<Book> searchByGenre2(Genre genre) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Book> allBooks() {
-		// TODO Auto-generated method stub
-		return null;
+		return bookRepo.findAll();
 	}
 
 	@Override
 	public Page<Book> allBookswithPagination(int pageNo, int size) {
+		Pageable page=PageRequest.of(pageNo, size);
 		// TODO Auto-generated method stub
-		return null;
+		return bookRepo.findAll(page);
 	}
 
 	@Override
 	public List<Book> searchByAuthour(int authourId) {
 		// TODO Auto-generated method stub
-		return null;
+		return bookRepo.searchByAuthour(authourId);
 	}
 
 	@Override
 	public List<Book> searchByGenre(Genre genre) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookRepo.findByGenre(genre);
 	}
 
 	@Override
-	public Book updateBook(Book book, int bookId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Book updateBook(BookDto book, int bookId) {
+	Book b=	bookRepo.findById(bookId).orElseThrow(()-> new  RuntimeException("Book "+bookId+" not found"));
+	BeanUtils.copyProperties(book, b);
+	bookRepo.save(b);
+		return b;
 	}
-
 	@Override
 	public void removeBook(int bookId) {
-		// TODO Auto-generated method stub
-		
 	}
-
 	@Override
 	public List<Book> searchByBookName(String bookName) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int updateCost(int bookId, float cost) {
+		return bookRepo.updateCost(bookId, cost);
 	}
 
 }
