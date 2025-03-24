@@ -10,7 +10,7 @@ import com.library.entity.User;
 public interface UserService {
 	User addNewUser(User u);
 	//need later....
-    Book borrowBook(BorrowBookDto borrowDto, String uname);
+    Book borrowBook(BorrowBookDto borrowDto);
 	Book returnBook(int tid);
 	boolean checkAvailability(int bookId);
 	List<Transaction>  chkTransactionByUser(int userId);

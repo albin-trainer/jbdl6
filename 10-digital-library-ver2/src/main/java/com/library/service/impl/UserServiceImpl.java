@@ -39,7 +39,7 @@ private PenaltyRepository penaltyRepo;
 	}
 
 	@Override
-	public Book borrowBook(BorrowBookDto borrowDto, String uname) {
+	public Book borrowBook(BorrowBookDto borrowDto) {
 		User user=userRepo.findById(borrowDto.getUserId()).orElseThrow(()-> new RuntimeException("user not found"));
 		Book book=bookRepo.findById(borrowDto.getBookId()).orElseThrow(()-> new RuntimeException("Book not found"));
 		Transaction t=new Transaction();
